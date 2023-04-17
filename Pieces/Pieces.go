@@ -2,7 +2,7 @@ package Pieces
 
 import "github.com/CasualBrainUtilisation/GoChess/Fields"
 
-//enums (or the og version of them)
+//enums (or the g0 version of them)
 //enum that represents the chessPiece.Type
 type PieceType int //type used to represent the type of a chessPiece
 
