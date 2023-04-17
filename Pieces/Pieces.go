@@ -24,8 +24,8 @@ const ( //defines all PieceColors to be used as enum values
 )
 
 type Piece struct { //struct that represents any chessPiece from pawn to king
-	pieceType  PieceType  //variable representing the type of the piece for example: 1 for Knight, those are defined in the consts() above
-	pieceColor PieceColor //variable representing the color of the piece for example: 0 for Black, those are defined in the consts() above
+	PieceType  PieceType  //variable representing the type of the piece for example: 1 for Knight, those are defined in the consts() above
+	PieceColor PieceColor //variable representing the color of the piece for example: 0 for Black, those are defined in the consts() above
 
-	boardPosition Fields.BoardField //variable representing the position of the chessPiece on the chessBoard
+	BoardPosition Fields.BoardField //variable representing the position of the chessPiece on the chessBoard
 }
