@@ -48,6 +48,8 @@ func LoadPositionFromFEN(fen string) []Pieces.Piece {
 		} else if curString == "/" { //if the curString is a slash, we'll increase the row by 1 and reset the column, to fill the next board row
 			row += 1   //increase the row
 			column = 0 //reset the column so we start at column 0 in the new row
+		} else { //if the currentString is not a valid FEN character we return an empty Piece.Piece slice, as the FEN
+			return make([]Pieces.Piece, 0, 0)
 		}
 	}
 
