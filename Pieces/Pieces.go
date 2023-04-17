@@ -1,5 +1,7 @@
 package Pieces
 
+import "github.com/CasualBrainUtilisation/GoChess/Fields"
+
 //enums (or the og version of them)
 //enum that represents the chessPiece.Type
 type PieceType int //type used to represent the type of a chessPiece
@@ -24,4 +26,6 @@ const ( //defines all PieceColors to be used as enum values
 type Piece struct { //struct that represents any chessPiece from pawn to king
 	pieceType  PieceType  //variable representing the type of the piece for example: 1 for Knight, those are defined in the consts() above
 	pieceColor PieceColor //variable representing the color of the piece for example: 0 for Black, those are defined in the consts() above
+
+	boardPosition Fields.BoardField //variable representing the position of the chessPiece on the chessBoard
 }
