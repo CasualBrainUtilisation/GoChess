@@ -13,7 +13,7 @@ func main() {
 
 	fmt.Println(piece)
 
-	var pieces []Pieces.Piece = FEN.LoadPositionFromFEN("NNKK")
+	var pieces []Pieces.Piece = FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 
 	fmt.Println(pieces)
 }

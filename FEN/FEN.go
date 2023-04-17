@@ -1,7 +1,9 @@
 package FEN //File that manages loading positions out of a FEN-string, or saving positions to a FEN-string
 
 import (
+	"strconv"
 	"strings"
+	"unicode"
 
 	"github.com/CasualBrainUtilisation/GoChess/Fields"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
@@ -37,6 +39,12 @@ func LoadPositionFromFEN(fen string) []Pieces.Piece {
 
 			column += 1 //increase the column by 1, so the next piece is placed in the next column
 			continue    //continue with the next character of the FEN string
+		} else if unicode.IsNumber(rune(curString[0])) { //check wether the character of curString, is a number, if so increase the column by it
+			columnIncr, err := strconv.Atoi(curString) //convert the string to a number
+			if err != nil {                            //if for some odd reason the string could not be converted to a number (which I could not understand whatshowever) return an empty Piece.Piece slice, as the FEN seems invalid
+				return make([]Pieces.Piece, 0, 0)
+			}
+			column += columnIncr //increase the column by the curString represented int
 		}
 	}
 
