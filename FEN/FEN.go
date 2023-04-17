@@ -27,6 +27,11 @@ func LoadPositionFromFEN(fen string) []Pieces.Piece {
 
 	//check the first piece of the splitted FEN string, which represents the pieces and their position on the board
 	for i, column, row := 0, 0, 0; i < len(fenParts[0]); i++ { //we'll check each character of the first fenPart piece, also we'll create the column and row variables to use in the for loop, to store the current position of the currently checked character's piece
+
+		if column > 8 || row > 8 { //check wether the current row or column is over 8, notice that values of 8 are valid, as they might be followed by a slash (letting 8 go through adding a piece to the toReturn slices is ok, as the new column value of 9 will immeadatly cause this if statement to be true anyhow) (over 8 is off board for sure though), if row/column are over 8, return an empty Pieces.Piece slice
+			return make([]Pieces.Piece, 0, 0)
+		}
+
 		var curString string = string(fenParts[0][i])                                                           //get the current string, so we do not have to get it every time we need it
 		if index := strings.Index(strings.Join(pieceLetters[:], ""), strings.ToLower(curString)); index != -1 { //get the index of the current string as lowercase (as the pieceLetters are lowerCase and r n we just check wether the curString/char represents a chess piece) in the pieceLetters (converted to a slice, so we can join it to one string) array as joined string, if it does exist (it'll be -1 if it doesn't) continue, adding the piece at corresponding position to the toReturn slice
 			//calculate the index for the PieceColor enum, of the piece we are about to create
