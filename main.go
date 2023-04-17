@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	var piece Pieces.Piece = Pieces.Piece{Pieces.Bishop, Pieces.Black, Fields.BoardField{1, 2}}
+	var piece Pieces.Piece = Pieces.Piece{PieceType: Pieces.Bishop, PieceColor: Pieces.Black, BoardPosition: Fields.BoardField{X: 1, Y: 2}}
 
 	fmt.Println(piece)
 }
