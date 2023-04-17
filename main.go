@@ -3,6 +3,7 @@ package main //this is the main file, meaning it'll handle all the other package
 import (
 	"fmt"
 
+	"github.com/CasualBrainUtilisation/GoChess/FEN"
 	"github.com/CasualBrainUtilisation/GoChess/Fields"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
 )
@@ -11,4 +12,8 @@ func main() {
 	var piece Pieces.Piece = Pieces.Piece{PieceType: Pieces.Bishop, PieceColor: Pieces.Black, BoardPosition: Fields.BoardField{X: 1, Y: 2}}
 
 	fmt.Println(piece)
+
+	var pieces []Pieces.Piece = FEN.LoadPositionFromFEN("NNKK")
+
+	fmt.Println(pieces)
 }
