@@ -3,6 +3,7 @@ package main //this is the main file, meaning it'll handle all the other package
 import (
 	"fmt"
 
+	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/FEN"
 	"github.com/CasualBrainUtilisation/GoChess/Fields"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
@@ -17,4 +18,6 @@ func main() {
 
 	fmt.Println(pieces)
 	fmt.Println("♔", "♚")
+
+	Board.VisualisePositionFromPieces(pieces)
 }
