@@ -48,7 +48,7 @@ func VisualisePositionFromPieces(position []Pieces.Piece) { //shows the current 
 	}
 
 	//print out the board, each row will be printed in a new line
-	for _, row := range visualisation {
-		fmt.Println(row)
+	for i, row := range visualisation {
+		fmt.Println(8-i, " ", row) //8-i prints the row number while 'row' prints the pieces in the row
 	}
 }
