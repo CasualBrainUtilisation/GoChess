@@ -51,5 +51,6 @@ func VisualisePositionFromPieces(position []Pieces.Piece) { //shows the current 
 	for i, row := range visualisation {
 		fmt.Println(8-i, " ", row) //8-i prints the row number while 'row' prints the pieces in the row, also we add a space between those for clarity
 	}
+	fmt.Println()
 	fmt.Println("   ", [9]string{"A", "B", "C", "D", "E", "F", "G", "H", ""}) //print out the letters to indicate the column position of pieces
 }
