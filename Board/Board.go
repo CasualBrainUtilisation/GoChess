@@ -22,7 +22,7 @@ func VisualisePositionFromPieces(position []Pieces.Piece) { //shows the current 
 
 	for y := 0; y < 8; y++ { //add the empty fields, to the visualisation chessBoard array
 		for x := 0; x < 8; x++ {
-			visualisation[y][x] = "_"
+			visualisation[y][x] = "ￜￜ"
 		}
 	}
 
