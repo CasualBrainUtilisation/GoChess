@@ -29,7 +29,7 @@ var whiteUnicodeChessPieces [6]string = [6]string{
 
 func VisualisePositionFromPieces(position []Pieces.Piece) { //shows the current position on the chessBoard in the terminal utilising the chessPiece unicoode characters
 
-	var visualisation [8][8]string //create the array that'll later be printed out to visualize the board
+	var visualisation [8][9]string //create the array that'll later be printed out to visualize the board, notice that this has 9 characters (not 8), wo we have an empty space after the pieces
 
 	for y := 0; y < 8; y++ { //add the empty fields, to the visualisation chessBoard array
 		for x := 0; x < 8; x++ {
@@ -49,6 +49,6 @@ func VisualisePositionFromPieces(position []Pieces.Piece) { //shows the current 
 
 	//print out the board, each row will be printed in a new line
 	for i, row := range visualisation {
-		fmt.Println(8-i, " ", row, " ") //8-i prints the row number while 'row' prints the pieces in the row, also we add a space between and after those for clarity
+		fmt.Println(8-i, " ", row) //8-i prints the row number while 'row' prints the pieces in the row, also we add a space between those for clarity
 	}
 }
