@@ -36,8 +36,8 @@ func LoadPositionFromFEN(fen string) []Pieces.Piece {
 		if index := strings.Index(strings.Join(pieceLetters[:], ""), strings.ToLower(curString)); index != -1 { //get the index of the current string as lowercase (as the pieceLetters are lowerCase and r n we just check wether the curString/char represents a chess piece) in the pieceLetters (converted to a slice, so we can join it to one string) array as joined string, if it does exist (it'll be -1 if it doesn't) continue, adding the piece at corresponding position to the toReturn slice
 			//calculate the index for the PieceColor enum, of the piece we are about to create
 			var colorInd int = 1                         //first set the piece to black, it'll be set to white if needed
-			if strings.ToLower(curString) == curString { //check if the curString is lowercase, by checking wether lowering the curString is still giving the same string as curString
-				colorInd = 0 //if the curString is lowercase, we have to set the colorIndex to 0, so the piece will be white
+			if strings.ToUpper(curString) == curString { //check if the curString is uppercase, by checking wether 'upering' the curString is still giving the same string as curString
+				colorInd = 0 //if the curString is uppercase, we have to set the colorIndex to 0, so the piece will be white
 			}
 
 			toReturn = append(toReturn, Pieces.Piece{PieceType: Pieces.PieceType(index), PieceColor: Pieces.PieceColor(colorInd), BoardPosition: Fields.BoardField{X: column, Y: row}}) //add the piece from curString, set its type to the index of the curString in the pieceLetters array, set the color to the calculated colorInd(ex) and set the position to the current column and row, of the FEN string
