@@ -33,6 +33,8 @@ const (
 type Move struct { //a stuct to represent a move on the chessBoard, it is used to store and perform a move
 	startPos Fields.BoardField //the position the move starts at
 	endPos   Fields.BoardField //the position the move ends at aka the piece moves to
+
+	moveType MoveType //the type of moved performed, e.g.: Normal/Castle ect., needed to perform a move properly or to calculate things like en Passant moves
 }
 
 func TryToPerformMove(move string, boardPosition []Pieces.Piece) { //this function will try to perform move from given move notation, if possible
