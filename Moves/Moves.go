@@ -39,19 +39,19 @@ type Move struct { //a stuct to represent a move on the chessBoard, it is used t
 }
 
 func TryToGetMove(moveNotation string, boardPosition []Pieces.Piece) (move Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
-	ok = true     //set ok to true on default, will be set to false if the moveNotation isn't valid throughout this function
+	ok = false    //set ok to true, so we can naked return, if something doesn't work, later on, we'll change it to true, before the last naked return
 	move = Move{} //this variable will later be returned, as the move represented by the moveNotation, its variables will be calculated throughout this function
 
 	var curIndex int = 0
 
 	//calculating the endPos of the move
-	if endPos, valid := getFieldPositionFromFieldNotation(moveNotation[curIndex:2]); valid == true { //if the notation at the current index (and the next one) is a fieldNotation, set it to the move.EndPos, else return with ok set to false (as the notation is invalid, cuz there has to be a fieldNotation here)
+	if endPos, valid := getFieldPositionFromFieldNotation(moveNotation[curIndex:2]); valid == true { //if the notation at the current index (and the next one) is a fieldNotation, set it to the move.EndPos, else return (as the notation is invalid, cuz there has to be a fieldNotation here)
 		move.EndPos = endPos
 	} else {
-		ok = false
 		return
 	}
 
+	ok = true
 	return //naked return statement, cuz i'm lazy, returns move and ok
 }
 
