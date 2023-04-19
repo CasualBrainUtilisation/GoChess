@@ -45,19 +45,36 @@ func TryToGetMove(moveNotation string, boardPosition []Pieces.Piece) (move Move,
 	var curIndex int = 0
 
 	//calculating the endPos of the move
-
-	if index := strings.Index(strings.Join(columnLetters[:], ""), strings.ToLower(string(moveNotation[curIndex]))); index != -1 { //get the index of the move string as lowercase (as the columnLetters are lowerCase and r n we just check wether the moveString/char represents a column letter) in the columnLetters (converted to a slice, so we can join it to one string) array as joined string, if it does exist (it'll be -1 if it doesn't) continue, adding the x.pos at corresponding position
-		move.EndPos.X = index //set the x position of the move endPos to the index of the first letter in the letters, as that is what it represents
+	if endPos, valid := getFieldPositionFromFieldNotation(moveNotation[curIndex:2]); valid == true { //if the notation at the current index (and the next one) is a fieldNotation, set it to the move.EndPos, else return with ok set to false (as the notation is invalid, cuz there has to be a fieldNotation here)
+		move.EndPos = endPos
+	} else {
+		ok = false
+		return
 	}
-	if unicode.IsNumber(rune(moveNotation[1])) { //check wether the 2nd character of moveNotation, is a number, if so set the move.endPos.Y to it, as that is what it represents
-		endY, err := strconv.Atoi(string(moveNotation[1])) //convert the string to a number
-		if err != nil {                                    //if for some odd reason the string could not be converted to a number (which I could not understand whatshowever) return set ok to false
+
+	return //naked return statement, cuz i'm lazy, returns move and ok
+}
+
+func getFieldPositionFromFieldNotation(fieldNotation string) (fieldPos Fields.BoardField, ok bool) { //function that'll get the position on the board from a fieldNotation, e.g.: a4 --> BoardPos{X=0, Y=4}, it also returns ok, which is false if the fieldNotation was not valid
+	fieldPos = Fields.BoardField{} //set the later retunred fieldPos to a new BoardField, which values we'll chagne throughout this function
+	ok = true                      //set the later returned ok to ture for first, will be set to false later if needed
+
+	if index := strings.Index(strings.Join(columnLetters[:], ""), strings.ToLower(string(fieldNotation[0]))); index != -1 { //get the index of the fieldnotation string as lowercase (as the columnLetters are lowerCase and r n we just check wether the moveString/char represents a column letter (doesn't matter wether cap)) in the columnLetters (converted to a slice, so we can join it to one string) array as joined string, if it does exist (it'll be -1 if it doesn't) continue, adding the x.pos at corresponding position
+		fieldPos.X = index //set the x position of the fieldPos to the index of the first letter in the letters, as that is what it represents
+	} else {
+		ok = false //set ok to false, as the fieldNotation is not valid, if the first character is not a letter in the columnLetters
+		return     //naked return (returns fieldPos, ok automatticly)
+	}
+	if unicode.IsNumber(rune(fieldNotation[1])) { //check wether the 2nd character of moveNotation, is a number, if so set the fieldPos.Y to it, as that is what it represents
+		endY, err := strconv.Atoi(string(fieldNotation[1])) //convert the string to a number
+		if err != nil {                                     //if for some odd reason the string could not be converted to a number (which I could not understand whatshowever) set ok to false and return the results
 			ok = false
-		} else { //set the move.endPos.Y accordingly if the string could be converted
-			move.EndPos.Y = endY
+			return
+		} else { //set the fieldPos.Y accordingly if the string could be converted
+			fieldPos.Y = 8 - endY //row 8 is 0y and row 1 is 7y ect. so thats why it's done this way
 		}
 
 	}
 
-	return //naked return statement, cuz i'm lazy, returns move and ok
+	return //return the calculated results
 }
