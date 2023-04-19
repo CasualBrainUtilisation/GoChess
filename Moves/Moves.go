@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/CasualBrainUtilisation/GoChess/Fields"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
 )
 
@@ -17,6 +18,21 @@ var columnLetters [8]string = [8]string{
 	"f",
 	"g",
 	"h",
+}
+
+// enums
+type MoveType int //represents an enum, that stores the type of a move, which is useful for performing it correctly or to calculate certain things (like in the case of a doublePawnMove the possible en Passant moves)
+
+const (
+	Normal         MoveType = 0
+	DoublePawnMove MoveType = 1
+	EnPassant      MoveType = 2
+	Castle         MoveType = 3
+)
+
+type Move struct { //a stuct to represent a move on the chessBoard, it is used to store and perform a move
+	startPos Fields.BoardField //the position the move starts at
+	endPos   Fields.BoardField //the position the move ends at aka the piece moves to
 }
 
 func TryToPerformMove(move string, boardPosition []Pieces.Piece) { //this function will try to perform move from given move notation, if possible
