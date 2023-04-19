@@ -23,7 +23,7 @@ var columnLetters [8]string = [8]string{
 // enums
 type MoveType int //represents an enum, that stores the type of a move, which is useful for performing it correctly or to calculate certain things (like in the case of a doublePawnMove the possible en Passant moves)
 
-const (
+const ( //defines all MoveTypes to be used as enum values
 	Normal         MoveType = 0
 	DoublePawnMove MoveType = 1
 	EnPassant      MoveType = 2
