@@ -39,7 +39,7 @@ type Move struct { //a stuct to represent a move on the chessBoard, it is used t
 }
 
 func TryToGetMove(moveNotation string, boardPosition []Pieces.Piece) (move Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
-
+	ok = true     //set ok to true on default, will be set to false if the moveNotation isn't valid throughout this function
 	move = Move{} //this variable will later be returned, as the move represented by the moveNotation, its variables will be calculated throughout this function
 
 	var curIndex int = 0
