@@ -19,7 +19,7 @@ var columnLetters [8]string = [8]string{
 	"h",
 }
 
-func TryToPerformMove(move string, boardPosition []Pieces.Piece) {
+func TryToPerformMove(move string, boardPosition []Pieces.Piece) { //this function will try to perform move from given move notation, if possible
 
 	var curIndex int = 0
 
