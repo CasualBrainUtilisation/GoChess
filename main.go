@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	var pieces []Pieces.Piece = FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/3n4/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+	var pieces []Pieces.Piece = FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 
 	Board.VisualisePositionFromPieces(pieces)
 }
