@@ -82,12 +82,31 @@ func getPossibleMovesForPiece(piece Pieces.Piece) (moves []Move) { //function th
 
 	switch piece.PieceType { //run the corresponding getMoves function for every piece, and add the results to the moves list
 	case Pieces.Bishop:
-
+		moves = append(moves, getBishopMoves(piece)...)
 	}
 
 	return moves
 }
 
 func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given bishop, we do not type check the bishop, it should always be one anyhow if this function is called, so make sure it really is
+	return moves
+}
+
+func getLineMoves(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { //function that returns a list of all possible moves for any given piece on a line with given gradient, this should be used to get bishop rook and queen moves
+
+	var checkedPos Fields.BoardField = piece.BoardPosition //used to check each indivudual field on the line with given gradient for validation
+	//already increase checkedPos x and y as we do not want to start checking for line moves on the starting square, which can not be a move
+	checkedPos.X += xIncr
+	checkedPos.Y += yIncr
+
+	for checkedPos.X >= 0 && checkedPos.X < 8 && checkedPos.Y >= 0 && checkedPos.Y > 8 { //for loop that'll scoute through every possible move destination field on line with given gradient, for that matter of fact, it'll end once the checked pos is out of the board
+
+		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: checkedPos, MoveType: Normal})
+
+		//setup the checking for the next field on the line
+		checkedPos.X += xIncr
+		checkedPos.Y += yIncr
+	}
+
 	return moves
 }
