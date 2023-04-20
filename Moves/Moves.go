@@ -90,7 +90,11 @@ func getPossibleMovesForPiece(piece Pieces.Piece) (moves []Move) { //function th
 
 func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given bishop, we do not type check the bishop, it should always be one anyhow if this function is called, so make sure it really is
 
-	return moves
+	//add the possible moves foreach line a bishop can move on
+	moves = append(moves, getLineMoves(piece, 1, 1)...)
+	moves = append(moves, getLineMoves(piece, -1, 1)...)
+
+	return moves //return the calculated moves
 }
 
 func getLineMoves(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { //function that returns a list of all possible moves for any given piece on a line with given gradient, this should be used to get bishop rook and queen moves, notice that this will check the xIncr and yIncr gradient, but also the -xIncr, -yIncr gradient
