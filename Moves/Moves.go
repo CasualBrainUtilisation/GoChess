@@ -86,7 +86,7 @@ func getMovesForLinePart(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { 
 	return moves //return the calculated moves
 }
 
-func getMovesForPieceTypeOfColor(pieces []Pieces.Piece, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //functio that returns all the moves for all the pieces with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving
+func GetMovesForPieceTypeOfColor(pieces []Pieces.Piece, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //function that returns all the moves for all the pieces with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving, it is used in the MoveNotation class for that matter of fact, so it has to be public (capital)
 
 	for _, piece := range pieces { //foreach piece we'll get the moves and add them to the later returned moves list, if it has the right color and type
 		if piece.PieceType == pieceType && piece.PieceColor == pieceColor { //check wether piece is of given type and color
