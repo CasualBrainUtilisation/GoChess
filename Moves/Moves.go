@@ -77,3 +77,17 @@ func getFieldPositionFromFieldNotation(fieldNotation string) (fieldPos Fields.Bo
 	ok = true //there hasn't been an issue so ok should be true now
 	return    //return the calculated results
 }
+
+func getPossibleMovesForPiece(piece Pieces.Piece) (moves []Move) { //function that returns all possible moves for given piece, these moves will not be removed if they are invalid because they cause a check for first, that'll be done in another function
+
+	switch piece.PieceType { //run the corresponding getMoves function for every piece, and add the results to the moves list
+	case Pieces.Bishop:
+
+	}
+
+	return moves
+}
+
+func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given bishop, we do not type check the bishop, it should always be one anyhow if this function is called, so make sure it really is
+	return moves
+}
