@@ -27,6 +27,10 @@ func getPossibleMovesForPiece(piece Pieces.Piece) (moves []Move) { //function th
 	switch piece.PieceType { //run the corresponding getMoves function for every piece, and add the results to the moves list
 	case Pieces.Bishop:
 		moves = append(moves, getBishopMoves(piece)...)
+	case Pieces.Rook:
+		moves = append(moves, getRookMoves(piece)...)
+	case Pieces.Queen:
+		moves = append(moves, getQueenMoves(piece)...)
 	}
 
 	return moves
