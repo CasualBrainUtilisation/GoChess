@@ -6,16 +6,15 @@ import (
 	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/FEN"
 	"github.com/CasualBrainUtilisation/GoChess/Input/MoveNotation"
-	"github.com/CasualBrainUtilisation/GoChess/Pieces"
 )
 
 func main() {
 
-	var pieces []Pieces.Piece = FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+	var chessBoard = Board.ChessBoard{CurPieces: FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")} //create a chessBoard with the start position loaded from the start FEN
 
-	Board.VisualisePositionFromPieces(pieces)
+	chessBoard.VisualisePositionFromPieces()
 
-	if move, ok := MoveNotation.TryToGetMoveFromNotation("Bd3", pieces); ok == true {
+	if move, ok := MoveNotation.TryToGetMoveFromNotation("Bd3", chessBoard.CurPieces); ok == true {
 		fmt.Println(move.EndPos)
 	}
 }
