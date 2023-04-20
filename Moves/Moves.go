@@ -88,11 +88,29 @@ func getPossibleMovesForPiece(piece Pieces.Piece) (moves []Move) { //function th
 	return moves
 }
 
-func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given bishop, we do not type check the bishop, it should always be one anyhow if this function is called, so make sure it really is
+func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece, if it was a bishop
 
 	//add the possible moves foreach line a bishop can move on
 	moves = append(moves, getLineMoves(piece, 1, 1)...)
 	moves = append(moves, getLineMoves(piece, -1, 1)...)
+
+	return moves //return the calculated moves
+}
+
+func getRookMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece, if it was a rook
+
+	//add the possible moves foreach line a rook can move on
+	moves = append(moves, getLineMoves(piece, 1, 0)...)
+	moves = append(moves, getLineMoves(piece, 0, 1)...)
+
+	return moves //return the calculated moves
+}
+
+func getQueenMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece, if it was a queen
+
+	//the queen can move on the squares a bishop and a rook can move on, so just get the rook and bishop moves and return them
+	moves = append(moves, getBishopMoves(piece)...)
+	moves = append(moves, getRookMoves(piece)...)
 
 	return moves //return the calculated moves
 }
