@@ -141,3 +141,7 @@ func getMovesForLinePart(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { 
 
 	return moves //return the calculated moves
 }
+
+func getMovesForPieceTypeOfColor(pieces []Pieces.Piece, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) { //functio that returns all the moves for all the pieces with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving
+
+}
