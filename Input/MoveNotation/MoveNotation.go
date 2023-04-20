@@ -22,21 +22,36 @@ var columnLetters [8]string = [8]string{
 	"h",
 }
 
+var pieceNotationLetters [8]string = [8]string{ //array representing the letters sued to specify the piece to move in the SAN move notation in the order of the PieceType enum vales in the Pieces package
+	"P", //the pawn can normally not be specified using SAN, further more it'll be used if there is no piece specified, but it doesn't matter, if for some reason you want to, you can do so :)
+	"N",
+	"B",
+	"R",
+	"Q",
+	"K",
+}
+
 func TryToGetMoveFromNotation(moveNotation string, boardPosition []Pieces.Piece) (move Moves.Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
 	ok = false          //set ok to true, so we can naked return, if something doesn't work, later on, we'll change it to true, before the last naked return
 	move = Moves.Move{} //this variable will later be returned, as the move represented by the moveNotation, its variables will be calculated throughout this function
 
 	var curIndex int = 0
 
+	var pieceTypeToMove Pieces.PieceType = Pieces.Pawn                                                                  //set the piece type, that will be moved to be a pawn on default, we'll change it if the piece is otherwhise defined in the SAN (it's pawn if there is no specification)
+	if index := strings.Index(strings.Join(pieceNotationLetters[:], ""), string(moveNotation[curIndex])); index != -1 { //get the index of the first moveNotation letter in the  joined pieceNotationLetters, if it's -1 (meaning it does not exist in the pieceNotationLetters), just ignore it, else set the pieceTypeToMove to PieceType with the index and increase the curIndex (as now we check the 2nd character)
+		pieceTypeToMove = Pieces.PieceType(index) //set the peiceTypeToMove to the one reffered to in the first character fo the SAN
+		curIndex += 1                             //increase the curIndex, as we'll now look at the next character for the field Notation
+	}
+
 	//calculating the endPos of the move
-	if endPos, valid := getFieldPositionFromFieldNotation(moveNotation[curIndex:2]); valid == true { //if the notation at the current index (and the next one) is a fieldNotation, set it to the move.EndPos, else return (as the notation is invalid, cuz there has to be a fieldNotation here)
+	if endPos, valid := getFieldPositionFromFieldNotation(moveNotation[curIndex : curIndex+2]); valid == true { //if the notation at the current index (and the next one) is a fieldNotation, set it to the move.EndPos, else return (as the notation is invalid, cuz there has to be a fieldNotation here)
 		move.EndPos = endPos
 	} else {
 		return
 	}
 
-	if movesForPieceTypeNoted := Moves.GetMovesForPieceTypeOfColor(boardPosition, Pieces.Bishop, Pieces.White); len(movesForPieceTypeNoted) != 0 { //get the moves for the pieceType the moveNotation is reffering to and check wether, there are any
-		for _, moveForPieceTypeNoted := range movesForPieceTypeNoted {
+	if movesForPieceTypeNoted := Moves.GetMovesForPieceTypeOfColor(boardPosition, pieceTypeToMove, Pieces.White); len(movesForPieceTypeNoted) != 0 { //get the moves for the pieceType the moveNotation is reffering to and check wether, there are any
+		for _, moveForPieceTypeNoted := range movesForPieceTypeNoted { //foreach move the pieceType the moveNotation is reffering to can do, check wether it has the in the moveNotation given endPos
 			if moveForPieceTypeNoted.EndPos == move.EndPos {
 				fmt.Println("apparently you could go there with a fancy bishop")
 			}
