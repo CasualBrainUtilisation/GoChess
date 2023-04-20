@@ -38,7 +38,7 @@ type Move struct { //a stuct to represent a move on the chessBoard, it is used t
 	MoveType MoveType //the type of moved performed, e.g.: Normal/Castle ect., needed to perform a move properly or to calculate things like en Passant moves
 }
 
-func TryToGetMove(moveNotation string, boardPosition []Pieces.Piece) (move Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
+func TryToGetMoveFromNotation(moveNotation string, boardPosition []Pieces.Piece) (move Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
 	ok = false    //set ok to true, so we can naked return, if something doesn't work, later on, we'll change it to true, before the last naked return
 	move = Move{} //this variable will later be returned, as the move represented by the moveNotation, its variables will be calculated throughout this function
 
