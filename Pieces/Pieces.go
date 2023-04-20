@@ -10,7 +10,7 @@ const ( //defines all PieceTypes to be used as enum values
 	Pawn   PieceType = 0
 	Knight PieceType = 1
 	Bishop PieceType = 2
-	Rock   PieceType = 3
+	Rook   PieceType = 3
 	Queen  PieceType = 4
 	King   PieceType = 5
 )
