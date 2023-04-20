@@ -1,5 +1,6 @@
 package MoveNotation //package that manages user input, if it is a moveNotation for exapmle e5, it'LL get the move the user refers to and perform it with help of the Moves package
 import (
+	"fmt"
 	"strconv"
 	"strings"
 	"unicode"
@@ -32,6 +33,14 @@ func TryToGetMoveFromNotation(moveNotation string, boardPosition []Pieces.Piece)
 		move.EndPos = endPos
 	} else {
 		return
+	}
+
+	if movesForPieceTypeNoted := Moves.GetMovesForPieceTypeOfColor(boardPosition, Pieces.Bishop, Pieces.White); len(movesForPieceTypeNoted) != 0 { //get the moves for the pieceType the moveNotation is reffering to and check wether, there are any
+		for _, moveForPieceTypeNoted := range movesForPieceTypeNoted {
+			if moveForPieceTypeNoted.EndPos == move.EndPos {
+				fmt.Println("apparently you could go there with a fancy bishop")
+			}
+		}
 	}
 
 	ok = true

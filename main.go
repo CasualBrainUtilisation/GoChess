@@ -15,7 +15,7 @@ func main() {
 
 	Board.VisualisePositionFromPieces(pieces)
 
-	if move, ok := MoveNotation.TryToGetMoveFromNotation("a6", []Pieces.Piece{}); ok == true {
+	if move, ok := MoveNotation.TryToGetMoveFromNotation("d3", pieces); ok == true {
 		fmt.Println(move.EndPos)
 	}
 }

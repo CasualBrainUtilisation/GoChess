@@ -74,7 +74,7 @@ func getMovesForLinePart(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { 
 	checkedPos.X += xIncr
 	checkedPos.Y += yIncr
 
-	for checkedPos.X >= 0 && checkedPos.X < 8 && checkedPos.Y >= 0 && checkedPos.Y > 8 { //for loop that'll scoute through every possible move destination field on line with given gradient, for that matter of fact, it'll end once the checked pos is out of the board
+	for checkedPos.X >= 0 && checkedPos.X < 8 && checkedPos.Y >= 0 && checkedPos.Y < 8 { //for loop that'll scoute through every possible move destination field on line with given gradient, for that matter of fact, it'll end once the checked pos is out of the board
 
 		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: checkedPos, MoveType: Normal})
 
