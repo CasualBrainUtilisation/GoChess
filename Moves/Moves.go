@@ -142,6 +142,13 @@ func getMovesForLinePart(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { 
 	return moves //return the calculated moves
 }
 
-func getMovesForPieceTypeOfColor(pieces []Pieces.Piece, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) { //functio that returns all the moves for all the pieces with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving
+func getMovesForPieceTypeOfColor(pieces []Pieces.Piece, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //functio that returns all the moves for all the pieces with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving
 
+	for _, piece := range pieces { //foreach piece we'll get the moves and add them to the later returned moves list, if it has the right color and type
+		if piece.PieceType == pieceType && piece.PieceColor == pieceColor { //check wether piece is of given type and color
+			moves = append(moves, getPossibleMovesForPiece(piece)...) //get and add the moves for the piece to the moves list
+		}
+	}
+
+	return moves //return the calculated moves
 }
