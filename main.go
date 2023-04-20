@@ -5,7 +5,7 @@ import (
 
 	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/FEN"
-	"github.com/CasualBrainUtilisation/GoChess/Moves"
+	"github.com/CasualBrainUtilisation/GoChess/Input/MoveNotation"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
 )
 
@@ -15,7 +15,7 @@ func main() {
 
 	Board.VisualisePositionFromPieces(pieces)
 
-	if move, ok := Moves.TryToGetMoveFromNotation("a6", []Pieces.Piece{}); ok == true {
+	if move, ok := MoveNotation.TryToGetMoveFromNotation("a6", []Pieces.Piece{}); ok == true {
 		fmt.Println(move.EndPos)
 	}
 }
