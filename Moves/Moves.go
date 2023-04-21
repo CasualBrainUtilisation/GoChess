@@ -161,8 +161,10 @@ func canPieceGoHere(board Board.ChessBoard, piece Pieces.Piece, posToCheck Field
 
 func getPawnMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a pawn
 
-	if _, ok := board.GetPieceAtBoardPosition(piece.BoardPosition.X, piece.BoardPosition.Y+1); ok == false { //check wether there is a piece directly in front of the pawn if there is not (meaning the pawn can go there) add the corresponding move to the later returned moves slice
-		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + 1}, MoveType: Normal})
+	var pawnDir [2]int = [2]int{-1, 1} //array that represents the direction a pawn moves, if its color is used as index of it
+
+	if _, ok := board.GetPieceAtBoardPosition(piece.BoardPosition.X, piece.BoardPosition.Y+pawnDir[piece.PieceColor]); ok == false { //check wether there is a piece directly in front of the pawn if there is not (meaning the pawn can go there) add the corresponding move to the later returned moves slice
+		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + pawnDir[piece.PieceColor]}, MoveType: Normal})
 	}
 
 	return moves
