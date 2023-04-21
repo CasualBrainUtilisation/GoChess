@@ -34,6 +34,8 @@ func getPossibleMovesForPiece(board Board.ChessBoard, piece Pieces.Piece) (moves
 		moves = append(moves, getQueenMoves(board, piece)...)
 	case Pieces.Knight:
 		moves = append(moves, getKnightMoves(board, piece)...)
+  case Pieces.King:
+		moves = append(moves, getKingMoves(board, piece)...)
 	}
 
 	return moves
