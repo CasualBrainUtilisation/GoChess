@@ -36,6 +36,8 @@ func getPossibleMovesForPiece(board Board.ChessBoard, piece Pieces.Piece) (moves
 		moves = append(moves, getKnightMoves(board, piece)...)
   case Pieces.King:
 		moves = append(moves, getKingMoves(board, piece)...)
+  case Pieces.Pawn:
+    moves = append(moves, getPawnMoves(board, piece)...)
 	}
 
 	return moves
@@ -155,6 +157,15 @@ func canPieceGoHere(board Board.ChessBoard, piece Pieces.Piece, posToCheck Field
 	}
 
 	return true
+}
+
+func getPawnMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a pawn
+
+  if _, ok := board.GetPieceAtBoardPosition(piece.BoardPosition.X, piece.BoardPosition.Y + 1); ok == false { //check wether there is a piece directly in front of the pawn if there is not (meaning the pawn can go there) add the corresponding move to the later returned moves slice
+    moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + 1}, MoveType: Normal})
+  }
+
+  return moves
 }
 
 func GetMovesForPieceTypeOfColor(board Board.ChessBoard, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //function that returns all the moves for all the pieces on given board with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving, it is used in the MoveNotation class for that matter of fact, so it has to be public (capital)
