@@ -81,6 +81,14 @@ func getMovesForLinePart(board Board.ChessBoard, piece Pieces.Piece, xIncr, yInc
 
 	for checkedPos.X >= 0 && checkedPos.X < 8 && checkedPos.Y >= 0 && checkedPos.Y < 8 { //for loop that'll scoute through every possible move destination field on line with given gradient, for that matter of fact, it'll end once the checked pos is out of the board
 
+		//so the piece won't go through pos
+		if pieceAtCheckedPos, ok := board.GetPieceAtBoardPosition(checkedPos.X, checkedPos.Y); ok == true { //get the piece at the checkedPos and check wether it exists, break out of the for loop if it does, as the piece can't move through pieces, add the move though if the piece is of different color (so we take it)
+			if pieceAtCheckedPos.PieceColor != piece.PieceColor { //add the move if the pieceToMove can take the pieceAtCheckedPos
+				moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: checkedPos, MoveType: Normal})
+			}
+			break //break out of the loop, so the piece to move can't move through other pieces
+		}
+
 		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: checkedPos, MoveType: Normal})
 
 		//setup the checking for the next field on the line
