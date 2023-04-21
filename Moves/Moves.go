@@ -124,6 +124,25 @@ func getKnightMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) {
 	return moves //return the calculated moves
 }
 
+func getKingMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a king
+
+	//Here we scatter through all possible offsets from the king's position a king move can have and check wether the king can go on the destinationField, if so we'll add the move to the later returned moves slice
+	for x := -1; x < 2; x++ {
+		for y := -1; y < 2; y++ {
+			var boardPos Fields.BoardField = Fields.BoardField{X: piece.BoardPosition.X + x, Y: piece.BoardPosition.Y + y} //create the boardPosition with given offset from the piece's position
+      if boardPos == piece.BoardPosition { //check wether the boardPos differs from the piece's pos if not it is not a move so continue with the next one
+        continue
+      }
+      
+			if canPieceGoHere(board, piece, boardPos) {                                                                    //check wether the piece can logically go to the boardPosition just created, if so add the corresponding move to the later returned moves sclice
+				moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: boardPos, MoveType: Normal}) //add the move corresponding to the the boardPosition, as the piece is able to go there
+			}
+		}
+	}
+  
+	return moves //return the calculated moves
+}
+
 func canPieceGoHere(board Board.ChessBoard, piece Pieces.Piece, posToCheck Fields.BoardField) bool { //function that checks wether given piece can go to a certain spot, considering its color and wether the position is on the board, not though its piece type, this is used for knight and king move calculations
 	if Fields.IsFieldOnBoard(posToCheck) == false { //if the posToCheck isn't even a valid chessBoard position, return false as no piece can ever go there
 		return false
