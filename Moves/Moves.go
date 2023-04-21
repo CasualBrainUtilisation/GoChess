@@ -34,10 +34,10 @@ func getPossibleMovesForPiece(board Board.ChessBoard, piece Pieces.Piece) (moves
 		moves = append(moves, getQueenMoves(board, piece)...)
 	case Pieces.Knight:
 		moves = append(moves, getKnightMoves(board, piece)...)
-  case Pieces.King:
+	case Pieces.King:
 		moves = append(moves, getKingMoves(board, piece)...)
-  case Pieces.Pawn:
-    moves = append(moves, getPawnMoves(board, piece)...)
+	case Pieces.Pawn:
+		moves = append(moves, getPawnMoves(board, piece)...)
 	}
 
 	return moves
@@ -134,16 +134,16 @@ func getKingMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { /
 	for x := -1; x < 2; x++ {
 		for y := -1; y < 2; y++ {
 			var boardPos Fields.BoardField = Fields.BoardField{X: piece.BoardPosition.X + x, Y: piece.BoardPosition.Y + y} //create the boardPosition with given offset from the piece's position
-      if boardPos == piece.BoardPosition { //check wether the boardPos differs from the piece's pos if not it is not a move so continue with the next one
-        continue
-      }
-      
-			if canPieceGoHere(board, piece, boardPos) {                                                                    //check wether the piece can logically go to the boardPosition just created, if so add the corresponding move to the later returned moves sclice
+			if boardPos == piece.BoardPosition {                                                                           //check wether the boardPos differs from the piece's pos if not it is not a move so continue with the next one
+				continue
+			}
+
+			if canPieceGoHere(board, piece, boardPos) { //check wether the piece can logically go to the boardPosition just created, if so add the corresponding move to the later returned moves sclice
 				moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: boardPos, MoveType: Normal}) //add the move corresponding to the the boardPosition, as the piece is able to go there
 			}
 		}
 	}
-  
+
 	return moves //return the calculated moves
 }
 
@@ -161,11 +161,11 @@ func canPieceGoHere(board Board.ChessBoard, piece Pieces.Piece, posToCheck Field
 
 func getPawnMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a pawn
 
-  if _, ok := board.GetPieceAtBoardPosition(piece.BoardPosition.X, piece.BoardPosition.Y + 1); ok == false { //check wether there is a piece directly in front of the pawn if there is not (meaning the pawn can go there) add the corresponding move to the later returned moves slice
-    moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + 1}, MoveType: Normal})
-  }
+	if _, ok := board.GetPieceAtBoardPosition(piece.BoardPosition.X, piece.BoardPosition.Y+1); ok == false { //check wether there is a piece directly in front of the pawn if there is not (meaning the pawn can go there) add the corresponding move to the later returned moves slice
+		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + 1}, MoveType: Normal})
+	}
 
-  return moves
+	return moves
 }
 
 func GetMovesForPieceTypeOfColor(board Board.ChessBoard, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //function that returns all the moves for all the pieces on given board with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving, it is used in the MoveNotation class for that matter of fact, so it has to be public (capital)
