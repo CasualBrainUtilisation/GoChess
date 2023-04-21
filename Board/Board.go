@@ -59,7 +59,7 @@ func (chessBoard ChessBoard) VisualisePositionFromPieces() { //shows the current
 	fmt.Println("   ", [9]string{"A", "B", "C", "D", "E", "F", "G", "H", ""}) //print out the letters to indicate the column position of pieces
 }
 
-func (chessBoard ChessBoard) getPieceAtBoardPosition(x, y int) (pieceAtPos Pieces.Piece, ok bool) { //function that'll return the piece at given x,y position on the chessBoard, ok'll be false, if there is no piece at given pos
+func (chessBoard ChessBoard) GetPieceAtBoardPosition(x, y int) (pieceAtPos Pieces.Piece, ok bool) { //function that'll return the piece at given x,y position on the chessBoard, ok'll be false, if there is no piece at given pos
 	ok = false                                   //set ok to false on default so it'll be false if there is no piece found at given x,y position
 	for _, piece := range chessBoard.CurPieces { //check foreach piece wether it is placed at the given x, y position
 		if piece.BoardPosition.X == x && piece.BoardPosition.Y == y { //check wether the piece is positioned at given board Position
