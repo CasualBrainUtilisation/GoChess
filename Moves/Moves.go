@@ -99,6 +99,41 @@ func getMovesForLinePart(board Board.ChessBoard, piece Pieces.Piece, xIncr, yInc
 	return moves //return the calculated moves
 }
 
+func getKnightMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a knight
+
+	//the knight has a quite werid movement system, here we scatter through all possible offsets from the knight's position a knight move can have and check wether the knight can go on the destinationField, if so we'll add the move to the later returned moves slice
+	for _, x := range [2]int{-2, 2} {
+		for _, y := range [2]int{-1, 1} {
+			var boardPos Fields.BoardField = Fields.BoardField{X: piece.BoardPosition.X + x, Y: piece.BoardPosition.Y + y} //create the boardPosition with given offset from the piece's position
+			if canPieceGoHere(board, piece, boardPos) {                                                                    //check wether the piece can logically go to the boardPosition just created, if so add the corresponding move to the later returned moves sclice
+				moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: boardPos, MoveType: Normal}) //add the move corresponding to the the boardPosition, as the piece is able to go there
+			}
+		}
+	}
+	for _, y := range [2]int{-2, 2} {
+		for _, x := range [2]int{-1, 1} {
+			var boardPos Fields.BoardField = Fields.BoardField{X: piece.BoardPosition.X + x, Y: piece.BoardPosition.Y + y} //create the boardPosition with given offset from the piece's position
+			if canPieceGoHere(board, piece, boardPos) {                                                                    //check wether the piece can logically go to the boardPosition just created, if so add the corresponding move to the later returned moves sclice
+				moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: boardPos, MoveType: Normal}) //add the move corresponding to the the boardPosition, as the piece is able to go there
+			}
+		}
+	}
+
+	return moves //return the calculated moves
+}
+
+func canPieceGoHere(board Board.ChessBoard, piece Pieces.Piece, posToCheck Fields.BoardField) bool { //function that checks wether given piece can go to a certain spot, considering its color and wether the position is on the board, not though its piece type, this is used for knight and king move calculations
+	if Fields.IsFieldOnBoard(posToCheck) == false { //if the posToCheck isn't even a valid chessBoard position, return false as no piece can ever go there
+		return false
+	}
+
+	if pieceAtPos, ok := board.GetPieceAtBoardPosition(posToCheck.X, posToCheck.Y); ok == true {
+		return pieceAtPos.PieceColor != piece.PieceColor
+	}
+
+	return true
+}
+
 func GetMovesForPieceTypeOfColor(board Board.ChessBoard, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //function that returns all the moves for all the pieces on given board with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving, it is used in the MoveNotation class for that matter of fact, so it has to be public (capital)
 
 	for _, piece := range board.CurPieces { //foreach piece we'll get the moves and add them to the later returned moves list, if it has the right color and type
