@@ -14,7 +14,7 @@ func main() {
 
 	chessBoard.VisualisePositionFromPieces()
 
-	if move, ok := MoveNotation.TryToGetMoveFromNotation("Bd3", chessBoard.CurPieces); ok == true {
+	if move, ok := MoveNotation.TryToGetMoveFromNotation(chessBoard, "Bd3"); ok == true {
 		fmt.Println(move.EndPos)
 	}
 }

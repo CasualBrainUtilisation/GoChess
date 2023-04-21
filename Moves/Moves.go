@@ -1,6 +1,7 @@
 package Moves
 
 import (
+	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/Fields"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
 )
@@ -22,21 +23,21 @@ type Move struct { //a stuct to represent a move on the chessBoard, it is used t
 	MoveType MoveType //the type of moved performed, e.g.: Normal/Castle ect., needed to perform a move properly or to calculate things like en Passant moves
 }
 
-func getPossibleMovesForPiece(piece Pieces.Piece) (moves []Move) { //function that returns all possible moves for given piece, these moves will not be removed if they are invalid because they cause a check for first, that'll be done in another function
+func getPossibleMovesForPiece(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all possible moves for given piece on given chessBoard, these moves will not be removed if they are invalid because they cause a check for first, that'll be done in another function
 
 	switch piece.PieceType { //run the corresponding getMoves function for every piece, and add the results to the moves list
 	case Pieces.Bishop:
-		moves = append(moves, getBishopMoves(piece)...)
+		moves = append(moves, getBishopMoves(board, piece)...)
 	case Pieces.Rook:
-		moves = append(moves, getRookMoves(piece)...)
+		moves = append(moves, getRookMoves(board, piece)...)
 	case Pieces.Queen:
-		moves = append(moves, getQueenMoves(piece)...)
+		moves = append(moves, getQueenMoves(board, piece)...)
 	}
 
 	return moves
 }
 
-func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece, if it was a bishop
+func getBishopMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a bishop
 
 	//add the possible moves foreach line a bishop can move on
 	moves = append(moves, getLineMoves(piece, 1, 1)...)
@@ -45,7 +46,7 @@ func getBishopMoves(piece Pieces.Piece) (moves []Move) { //function that returns
 	return moves //return the calculated moves
 }
 
-func getRookMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece, if it was a rook
+func getRookMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a rook
 
 	//add the possible moves foreach line a rook can move on
 	moves = append(moves, getLineMoves(piece, 1, 0)...)
@@ -54,11 +55,11 @@ func getRookMoves(piece Pieces.Piece) (moves []Move) { //function that returns a
 	return moves //return the calculated moves
 }
 
-func getQueenMoves(piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece, if it was a queen
+func getQueenMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a queen
 
 	//the queen can move on the squares a bishop and a rook can move on, so just get the rook and bishop moves and return them
-	moves = append(moves, getBishopMoves(piece)...)
-	moves = append(moves, getRookMoves(piece)...)
+	moves = append(moves, getBishopMoves(board, piece)...)
+	moves = append(moves, getRookMoves(board, piece)...)
 
 	return moves //return the calculated moves
 }
@@ -90,11 +91,11 @@ func getMovesForLinePart(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { 
 	return moves //return the calculated moves
 }
 
-func GetMovesForPieceTypeOfColor(pieces []Pieces.Piece, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //function that returns all the moves for all the pieces with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving, it is used in the MoveNotation class for that matter of fact, so it has to be public (capital)
+func GetMovesForPieceTypeOfColor(board Board.ChessBoard, pieceType Pieces.PieceType, pieceColor Pieces.PieceColor) (moves []Move) { //function that returns all the moves for all the pieces on given board with given type of given color, this is necessary to get the move a moveNotation is reffering to e. g.: Nf3 --> move with f3 dest, and a Knight moving, it is used in the MoveNotation class for that matter of fact, so it has to be public (capital)
 
-	for _, piece := range pieces { //foreach piece we'll get the moves and add them to the later returned moves list, if it has the right color and type
+	for _, piece := range board.CurPieces { //foreach piece we'll get the moves and add them to the later returned moves list, if it has the right color and type
 		if piece.PieceType == pieceType && piece.PieceColor == pieceColor { //check wether piece is of given type and color
-			moves = append(moves, getPossibleMovesForPiece(piece)...) //get and add the moves for the piece to the moves list
+			moves = append(moves, getPossibleMovesForPiece(board, piece)...) //get and add the moves for the piece to the moves list
 		}
 	}
 

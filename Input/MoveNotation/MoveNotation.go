@@ -5,6 +5,7 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/Fields"
 	"github.com/CasualBrainUtilisation/GoChess/Moves"
 	"github.com/CasualBrainUtilisation/GoChess/Pieces"
@@ -31,7 +32,7 @@ var pieceNotationLetters [8]string = [8]string{ //array representing the letters
 	"K",
 }
 
-func TryToGetMoveFromNotation(moveNotation string, boardPosition []Pieces.Piece) (move Moves.Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
+func TryToGetMoveFromNotation(board Board.ChessBoard, moveNotation string) (move Moves.Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
 	ok = false          //set ok to true, so we can naked return, if something doesn't work, later on, we'll change it to true, before the last naked return
 	move = Moves.Move{} //this variable will later be returned, as the move represented by the moveNotation, its variables will be calculated throughout this function
 
@@ -50,7 +51,7 @@ func TryToGetMoveFromNotation(moveNotation string, boardPosition []Pieces.Piece)
 		return
 	}
 
-	if movesForPieceTypeNoted := Moves.GetMovesForPieceTypeOfColor(boardPosition, pieceTypeToMove, Pieces.White); len(movesForPieceTypeNoted) != 0 { //get the moves for the pieceType the moveNotation is reffering to and check wether, there are any
+	if movesForPieceTypeNoted := Moves.GetMovesForPieceTypeOfColor(board, pieceTypeToMove, Pieces.White); len(movesForPieceTypeNoted) != 0 { //get the moves for the pieceType the moveNotation is reffering to and check wether, there are any
 		for _, moveForPieceTypeNoted := range movesForPieceTypeNoted { //foreach move the pieceType the moveNotation is reffering to can do, check wether it has the in the moveNotation given endPos
 			if moveForPieceTypeNoted.EndPos == move.EndPos {
 				fmt.Println("apparently you could go there with a fancy bishop")
