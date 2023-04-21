@@ -40,8 +40,8 @@ func getPossibleMovesForPiece(board Board.ChessBoard, piece Pieces.Piece) (moves
 func getBishopMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a bishop
 
 	//add the possible moves foreach line a bishop can move on
-	moves = append(moves, getLineMoves(piece, 1, 1)...)
-	moves = append(moves, getLineMoves(piece, -1, 1)...)
+	moves = append(moves, getLineMoves(board, piece, 1, 1)...)
+	moves = append(moves, getLineMoves(board, piece, -1, 1)...)
 
 	return moves //return the calculated moves
 }
@@ -49,8 +49,8 @@ func getBishopMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) {
 func getRookMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { //function that returns all the possible moves for a given piece on given chessBoard, if it was a rook
 
 	//add the possible moves foreach line a rook can move on
-	moves = append(moves, getLineMoves(piece, 1, 0)...)
-	moves = append(moves, getLineMoves(piece, 0, 1)...)
+	moves = append(moves, getLineMoves(board, piece, 1, 0)...)
+	moves = append(moves, getLineMoves(board, piece, 0, 1)...)
 
 	return moves //return the calculated moves
 }
@@ -64,15 +64,15 @@ func getQueenMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { 
 	return moves //return the calculated moves
 }
 
-func getLineMoves(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { //function that returns a list of all possible moves for any given piece on a line with given gradient, this should be used to get bishop rook and queen moves, notice that this will check the xIncr and yIncr gradient, but also the -xIncr, -yIncr gradient
+func getLineMoves(board Board.ChessBoard, piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { //function that returns a list of all possible moves for any given piece on given borad on a line with given gradient, this should be used to get bishop rook and queen moves, notice that this will check the xIncr and yIncr gradient, but also the -xIncr, -yIncr gradient
 
-	moves = append(moves, getMovesForLinePart(piece, xIncr, yIncr)...)   //first add the moves possible on line with given gradient
-	moves = append(moves, getMovesForLinePart(piece, -xIncr, -yIncr)...) //add the moves possible on line in direction opposite to the given gradient
+	moves = append(moves, getMovesForLinePart(board, piece, xIncr, yIncr)...)   //first add the moves possible on line with given gradient
+	moves = append(moves, getMovesForLinePart(board, piece, -xIncr, -yIncr)...) //add the moves possible on line in direction opposite to the given gradient
 
 	return moves //return the calculated moves
 }
 
-func getMovesForLinePart(piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { //method that returns moves for each field on a line with given gradient not the opposite direction though
+func getMovesForLinePart(board Board.ChessBoard, piece Pieces.Piece, xIncr, yIncr int) (moves []Move) { //method that returns moves for each field on a line with given gradient not the opposite direction though
 
 	var checkedPos Fields.BoardField = piece.BoardPosition //used to check each indivudual field on the line with given gradient for validation
 	//already increase checkedPos x and y as we do not want to start checking for line moves on the starting square, which can not be a move
