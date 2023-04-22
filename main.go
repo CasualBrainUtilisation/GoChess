@@ -5,6 +5,7 @@ import (
 
 	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/FEN"
+	"github.com/CasualBrainUtilisation/GoChess/Input"
 	"github.com/CasualBrainUtilisation/GoChess/Input/MoveNotation"
 )
 
@@ -17,4 +18,6 @@ func main() {
 	if move, ok := MoveNotation.TryToGetMoveFromNotation(chessBoard, "d3"); ok == true {
 		fmt.Println(move.EndPos)
 	}
+
+	Input.RespondToUserInputRepeatly()
 }
