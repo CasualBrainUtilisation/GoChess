@@ -51,10 +51,8 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 			if move, ok := MoveNotation.TryToGetMoveFromNotation(chessBoard, commandParts[0]); ok == true { //try to get the move the user inputted, if a move was inputted, perform it
 				Moves.PerformMove(chessBoard, move)
 				chessBoard.VisualisePositionFromPieces() //print out chessBoard with moved piece
-
 			}
 		}
-
 		fmt.Println() //always print a line here to seperate the user input line from the new output
 	}
 }
