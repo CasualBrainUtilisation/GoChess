@@ -27,10 +27,10 @@ func RespondToUserInputRepeatly() { //loop that'll constantly run, it'll wait fo
 			switch strings.ToLower(commandParts[1]) { //search for valid subcommands
 			case "new":
 				fmt.Println("starting a new game")
+			default:
+				fmt.Println("invalid subcommand for 'game'")
+				return
 			}
-		default:
-			fmt.Println("invalid subcommand for 'game'")
-			return
 		}
 	}
 }
