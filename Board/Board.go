@@ -59,12 +59,12 @@ func (chessBoard ChessBoard) VisualisePositionFromPieces() { //shows the current
 	fmt.Println("   ", [9]string{"A", "B", "C", "D", "E", "F", "G", "H", ""}) //print out the letters to indicate the column position of pieces
 }
 
-func (chessBoard ChessBoard) GetPieceAtBoardPosition(x, y int) (pieceAtPos Pieces.Piece, ok bool) { //function that'll return the piece at given x,y position on the chessBoard, ok'll be false, if there is no piece at given pos
-	ok = false                                   //set ok to false on default so it'll be false if there is no piece found at given x,y position
-	for _, piece := range chessBoard.CurPieces { //check foreach piece wether it is placed at the given x, y position
+func (chessBoard ChessBoard) GetPieceAtBoardPosition(x, y int) (pieceAtPos *Pieces.Piece, ok bool) { //function that'll return the piece at given x,y position on the chessBoard, ok'll be false, if there is no piece at given pos
+	ok = false                                            //set ok to false on default so it'll be false if there is no piece found at given x,y position
+	for pieceIndex, piece := range chessBoard.CurPieces { //check foreach piece wether it is placed at the given x, y position
 		if piece.BoardPosition.X == x && piece.BoardPosition.Y == y { //check wether the piece is positioned at given board Position
-			pieceAtPos = piece //set the pieceAtPos (will be returned) to piece found at given x, y position
-			ok = true          //set ok to true as we found a piece
+			pieceAtPos = &chessBoard.CurPieces[pieceIndex] //set the pieceAtPos (will be returned) to piece found at given x, y position, use the pointer, so that other functions can use this method and modify returned piece, this for example is needed to move pieces
+			ok = true                                      //set ok to true as we found a piece
 		}
 	}
 	return //return the results
