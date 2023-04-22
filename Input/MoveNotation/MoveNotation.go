@@ -37,6 +37,10 @@ func TryToGetMoveFromNotation(board Board.ChessBoard, moveNotation string) (move
 
 	var curIndex int = 0
 
+	//remove any character that might be added in between pieceTypeCharacter and chessBoardFields, that are not necessary to perform moves properly
+	moveNotation = strings.ReplaceAll(moveNotation, "-", "")
+	moveNotation = strings.ReplaceAll(moveNotation, "x", "")
+
 	var pieceTypeToMove Pieces.PieceType = Pieces.Pawn                                                                  //set the piece type, that will be moved to be a pawn on default, we'll change it if the piece is otherwhise defined in the SAN (it's pawn if there is no specification)
 	if index := strings.Index(strings.Join(pieceNotationLetters[:], ""), string(moveNotation[curIndex])); index != -1 { //get the index of the first moveNotation letter in the  joined pieceNotationLetters, if it's -1 (meaning it does not exist in the pieceNotationLetters), just ignore it, else set the pieceTypeToMove to PieceType with the index and increase the curIndex (as now we check the 2nd character)
 		pieceTypeToMove = Pieces.PieceType(index) //set the peiceTypeToMove to the one reffered to in the first character fo the SAN
