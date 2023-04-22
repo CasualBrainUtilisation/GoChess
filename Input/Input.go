@@ -23,12 +23,13 @@ func RespondToUserInputRepeatly() { //loop that'll constantly run, it'll wait fo
 		case "game": //game is used to start new games and load FENs ect. for that we'll search for further subcommands
 			if len(commandParts) == 0 { //if there is no subcommand, give the user a brief description of the game command
 				fmt.Println("game is used to start a new game or load a position from a FEN")
-			}
-			switch strings.ToLower(commandParts[1]) { //search for valid subcommands
-			case "new":
-				fmt.Println("starting a new game")
-			default:
-				fmt.Println("invalid subcommand for 'game'")
+			} else {
+				switch strings.ToLower(commandParts[1]) { //search for valid subcommands
+				case "new":
+					fmt.Println("starting a new game")
+				default:
+					fmt.Println("invalid subcommand for 'game'")
+				}
 			}
 		}
 	}
