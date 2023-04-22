@@ -29,7 +29,6 @@ func RespondToUserInputRepeatly() { //loop that'll constantly run, it'll wait fo
 				fmt.Println("starting a new game")
 			default:
 				fmt.Println("invalid subcommand for 'game'")
-				return
 			}
 		}
 	}
