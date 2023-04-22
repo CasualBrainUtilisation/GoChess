@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/CasualBrainUtilisation/GoChess/Board"
+	"github.com/CasualBrainUtilisation/GoChess/FEN"
 )
 
 func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll constantly run, it'll wait for user input, after doing what the user comanded it'll wait for new input ect, it needs the chessBoard for a bunch of function it'll run as response to some inputs
@@ -28,7 +29,11 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 			} else {
 				switch strings.ToLower(commandParts[1]) { //search for valid subcommands
 				case "new":
-					fmt.Println("starting a new game")
+					fmt.Println("starting a new game") //inform the user that its command'll be executed
+					fmt.Println()
+
+					var chessBoard = Board.ChessBoard{CurPieces: FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")} //create a chessBoard with the start position loaded from the start FEN
+					chessBoard.VisualisePositionFromPieces()                                                                                          //print out chessBoard
 				default:
 					fmt.Println("invalid subcommand for 'game'")
 				}
