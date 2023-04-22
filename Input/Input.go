@@ -16,7 +16,7 @@ func RespondToUserInputRepeatly() { //loop that'll constantly run, it'll wait fo
 		var commandParts []string = strings.Fields(input) //get the parts of the user's input, divided by whitespaces, so we can access subcommands easily
 
 		switch strings.ToLower(commandParts[0]) { //check if the user inputted certain things and if so run the corresponding functions (compare lowercased so the case doesn't matter)
-		case "quit": //in case the user put in 'quit', we'll end this programm by ending the function with return
+		case "quit", "stop", "exit": //in case the user put in 'quit' ect, we'll end this programm by ending the function with return
 			fmt.Println()
 			fmt.Println("Ending the game")
 			return
