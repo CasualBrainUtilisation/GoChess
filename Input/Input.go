@@ -7,6 +7,9 @@ import (
 
 	"github.com/CasualBrainUtilisation/GoChess/Board"
 	"github.com/CasualBrainUtilisation/GoChess/FEN"
+  "github.com/CasualBrainUtilisation/GoChess/Input/MoveNotation"
+  	"github.com/CasualBrainUtilisation/GoChess/Moves"
+
 )
 
 func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll constantly run, it'll wait for user input, after doing what the user comanded it'll wait for new input ect, it needs the chessBoard for a bunch of function it'll run as response to some inputs
@@ -45,6 +48,12 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 					fmt.Println("invalid subcommand for 'game'")
 				}
 			}
+      default: //if no specific command was inputted it should be a sinple chessMove which we'll try to get and perform
+      if move, ok := MoveNotation.TryToGetMoveFromNotation(chessBoard, commandParts[0]); ok == true { //try to get the move the user inputted, if a move was inputted, perform it
+        Moves.PerformMove(chessBoard, move)
+        					chessBoard.VisualisePositionFromPieces()                                                                                      //print out chessBoard with moved piece
+
+      }
 		}
 
 		fmt.Println() //always print a line here to seperate the user input line from the new output
