@@ -1,6 +1,5 @@
 package MoveNotation //package that manages user input, if it is a moveNotation for exapmle e5, it'LL get the move the user refers to and perform it with help of the Moves package
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"unicode"
@@ -53,13 +52,13 @@ func TryToGetMoveFromNotation(board Board.ChessBoard, moveNotation string) (move
 
 	if movesForPieceTypeNoted := Moves.GetMovesForPieceTypeOfColor(board, pieceTypeToMove, Pieces.White); len(movesForPieceTypeNoted) != 0 { //get the moves for the pieceType the moveNotation is reffering to and check wether, there are any
 		for _, moveForPieceTypeNoted := range movesForPieceTypeNoted { //foreach move the pieceType the moveNotation is reffering to can do, check wether it has the in the moveNotation given endPos
-			if moveForPieceTypeNoted.EndPos == move.EndPos {
-				fmt.Println("apparently you could go there with a fancy bishop")
+			if moveForPieceTypeNoted.EndPos == move.EndPos { //if there is a move on the board with given endPos, we'll set the move's start pos to its startPos, also set ok to true as the move is valid, it'll be false on default, so if there is no move with the endPos we'll later return false
+				move.StartPos = moveForPieceTypeNoted.StartPos //set the move to use the found move for piece type as start pos
+				ok = true                                      //set ok to true as the move is valid now
 			}
 		}
 	}
 
-	ok = true
 	return //naked return statement, cuz i'm lazy, returns move and ok
 }
 
