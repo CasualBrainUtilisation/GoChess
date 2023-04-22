@@ -14,5 +14,5 @@ func main() {
 
 	chessBoard.VisualisePositionFromPieces()
 	fmt.Println() //make a new line to make seperate from usere's input
-	Input.RespondToUserInputRepeatly()
+	Input.RespondToUserInputRepeatly(chessBoard)
 }

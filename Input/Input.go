@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/CasualBrainUtilisation/GoChess/Board"
 )
 
-func RespondToUserInputRepeatly() { //loop that'll constantly run, it'll wait for user input, after doing what the user comanded it'll wait for new input ectinput anymore
+func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll constantly run, it'll wait for user input, after doing what the user comanded it'll wait for new input ect, it needs the chessBoard for a bunch of function it'll run as response to some inputs
 	reader := bufio.NewReader(os.Stdin) //reader that'll be used throughout this function, to get the user input in the terminal
 
 	for { //while this programm is supposed to run (the user will stop that eventually), we'll get the user's input with the help of the bufio.Reader and run the corresponding functions here
