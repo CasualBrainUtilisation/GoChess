@@ -46,5 +46,7 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 				}
 			}
 		}
+
+		fmt.Println() //always print a line here to seperate the user input line from the new output
 	}
 }
