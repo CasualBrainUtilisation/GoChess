@@ -181,11 +181,10 @@ func GetMovesForPieceTypeOfColor(board Board.ChessBoard, pieceType Pieces.PieceT
 	return moves //return the calculated moves
 }
 
-
-//performing moves
-//following functions are used to actually perform moves that might be calcated with functions above
+// performing moves
+// following functions are used to actually perform moves that might be calcated with functions above
 func PerformMove(chessBoard Board.ChessBoard, move Move) { //function that'll perform given move on given chessBoard
-  piece, _ := chessBoard.GetPieceAtBoardPosition(move.StartPos.X, move.StartPos.Y) //get the piece at the start pos of the move, so the piece we are about to move
+	piece, _ := chessBoard.GetPieceAtBoardPosition(move.StartPos.X, move.StartPos.Y) //get the piece at the start pos of the move, so the piece we are about to move
 
-  piece.BoardPosition = move.EndPos //move the piece at startPos to the move's EndPos by changing its pos to the endPos 
+	piece.BoardPosition = move.EndPos //move the piece at startPos to the move's EndPos by changing its pos to the endPos
 }
