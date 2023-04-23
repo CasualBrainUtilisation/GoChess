@@ -9,6 +9,7 @@ import (
 	"github.com/CasualBrainUtilisation/GoChess/FEN"
 	"github.com/CasualBrainUtilisation/GoChess/Input/MoveNotation"
 	"github.com/CasualBrainUtilisation/GoChess/Moves"
+	"github.com/CasualBrainUtilisation/GoChess/Pieces"
 )
 
 func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll constantly run, it'll wait for user input, after doing what the user comanded it'll wait for new input ect, it needs the chessBoard for a bunch of function it'll run as response to some inputs
@@ -35,8 +36,8 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 						fmt.Println("starting a new game") //inform the user that its command'll be executed
 						fmt.Println()
 
-						chessBoard = Board.ChessBoard{CurPieces: FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")} //create a chessBoard with the start position loaded from the start FEN
-						chessBoard.VisualisePositionFromPieces()                                                                                      //print out chessBoard
+						chessBoard = Board.ChessBoard{CurPieces: FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"), ColorToMove: Pieces.White} //create a chessBoard with the start position loaded from the start FEN
+						chessBoard.VisualisePositionFromPieces()                                                                                                                 //print out chessBoard
 					case "load": //this will load the FEN in the commandPart[2]
 						if len(commandParts) == 2 { //if there is no subcommand to load, give the user a brief description of the game load command
 							fmt.Println("load can be used to load a FEN on the CLI chessBoard")
@@ -50,7 +51,7 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 				}
 			default: //if no specific command was inputted it should be a sinple chessMove which we'll try to get and perform
 				if move, ok := MoveNotation.TryToGetMoveFromNotation(chessBoard, commandParts[0]); ok == true { //try to get the move the user inputted, if a move was inputted, perform it
-					Moves.PerformMove(chessBoard, move)
+					Moves.PerformMove(&chessBoard, move)     //here we pass a pointer of the board so the ColorToMove can change through PerformMove()
 					chessBoard.VisualisePositionFromPieces() //print out chessBoard with moved piece
 				} else {
 					fmt.Println("invalid command or move")

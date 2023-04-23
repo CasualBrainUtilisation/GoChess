@@ -183,7 +183,7 @@ func GetMovesForPieceTypeOfColor(board Board.ChessBoard, pieceType Pieces.PieceT
 
 // performing moves
 // following functions are used to actually perform moves that might be calcated with functions above
-func PerformMove(chessBoard Board.ChessBoard, move Move) { //function that'll perform given move on given chessBoard
+func PerformMove(chessBoard *Board.ChessBoard, move Move) { //function that'll perform given move on given chessBoard, we need a pointer to the board as we wanna change the color to move
 	piece, _ := chessBoard.GetPieceAtBoardPosition(move.StartPos.X, move.StartPos.Y) //get the piece at the start pos of the move, so the piece we are about to move
 
 	if _, ok := chessBoard.GetPieceAtBoardPosition(move.EndPos.X, move.EndPos.Y); ok == true { //check if there is a piece at the move destination pos if so, remove it, effectifly taking it with the piece that'll be moved
@@ -191,4 +191,6 @@ func PerformMove(chessBoard Board.ChessBoard, move Move) { //function that'll pe
 	}
 
 	piece.BoardPosition = move.EndPos //move the piece at startPos to the move's EndPos by changing its pos to the endPos
+
+	chessBoard.ColorToMove = 1 - chessBoard.ColorToMove //change the ColorToMove for the chessBoard (it switches between 0, 1 (white, black)), so next move it's the other color's turn
 }
