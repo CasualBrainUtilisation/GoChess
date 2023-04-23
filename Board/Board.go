@@ -28,7 +28,8 @@ var whiteUnicodeChessPieces [6]string = [6]string{
 }
 
 type ChessBoard struct { //struct that represents a chessBoard, therefore storing the piece's currently on board
-	CurPieces []Pieces.Piece //variable that stores the pieces currently placed on the chess board
+	CurPieces   []Pieces.Piece    //variable that stores the pieces currently placed on the chess board
+	ColorToMove Pieces.PieceColor //variable that stores the color that will perform the next move
 }
 
 func (chessBoard ChessBoard) VisualisePositionFromPieces() { //shows the current position on the chessBoard in the terminal utilising the chessPiece unicoode characters
