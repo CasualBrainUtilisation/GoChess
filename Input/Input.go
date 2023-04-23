@@ -53,7 +53,7 @@ func RespondToUserInputRepeatly(chessBoard Board.ChessBoard) { //loop that'll co
 					Moves.PerformMove(chessBoard, move)
 					chessBoard.VisualisePositionFromPieces() //print out chessBoard with moved piece
 				} else {
-					fmt.Println("invalid command")
+					fmt.Println("invalid command or move")
 				}
 			}
 		}
