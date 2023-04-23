@@ -47,6 +47,10 @@ func TryToGetMoveFromNotation(board Board.ChessBoard, moveNotation string) (move
 		curIndex += 1                             //increase the curIndex, as we'll now look at the next character for the field Notation
 	}
 
+	if curIndex+1 > len(moveNotation)-1 { //if the index (+2 because we check the next two) we currently check for some odd reason is bigger than the last moveNotation string's index, the moveNotation is invalid and we'll return (ok is false already)
+		return
+	}
+
 	//calculating the endPos of the move
 	if endPos, valid := getFieldPositionFromFieldNotation(moveNotation[curIndex : curIndex+2]); valid == true { //if the notation at the current index (and the next one) is a fieldNotation, set it to the move.EndPos, else return (as the notation is invalid, cuz there has to be a fieldNotation here)
 		move.EndPos = endPos
