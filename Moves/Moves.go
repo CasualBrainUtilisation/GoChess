@@ -170,7 +170,7 @@ func getPawnMoves(board Board.ChessBoard, piece Pieces.Piece) (moves []Move) { /
 		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + pawnDir[piece.PieceColor]}, MoveType: Normal})
 
     	if _, ok := board.GetPieceAtBoardPosition(piece.BoardPosition.X, piece.BoardPosition.Y+pawnDir[piece.PieceColor] * 2); ok == false && pawnStartPos[piece.PieceColor] == piece.BoardPosition.Y{ //if the pawn can go 1 square forward it may also be able to go 2, check wether there is not a piece two squares in front of the pawn also check wether the pawn still is on its starting square, add the corresponding move to the later returned moves slice if the double move is valid
-        		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + pawnDir[piece.PieceColor] * 2}, MoveType: Normal})
+        		moves = append(moves, Move{StartPos: piece.BoardPosition, EndPos: Fields.BoardField{X: piece.BoardPosition.X, Y: piece.BoardPosition.Y + pawnDir[piece.PieceColor] * 2}, MoveType: DoublePawnMove})
 
       }
 	}
