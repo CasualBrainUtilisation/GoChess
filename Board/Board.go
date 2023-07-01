@@ -70,3 +70,11 @@ func (chessBoard ChessBoard) GetPieceAtBoardPosition(x, y int) (pieceAtPos *Piec
 	}
 	return //return the results
 }
+
+func (chessBoard ChessBoard) RemovePieceFromBoard(pieceToRemove *Pieces.Piece) { //functino that'll remove the piece from the board.CurPieces list, that is placed at given position
+	for i, piece := range chessBoard.CurPieces {
+		if piece == *pieceToRemove {
+			chessBoard.CurPieces = append(chessBoard.CurPieces[:i], chessBoard.CurPieces[i+1:]...)
+		}
+	}
+}
