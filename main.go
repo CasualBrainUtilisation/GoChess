@@ -14,6 +14,6 @@ func main() {
 	var chessBoard = Board.ChessBoard{CurPieces: FEN.LoadPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"), ColorToMove: Pieces.White} //create a chessBoard with the start position loaded from the start FEN
 
 	chessBoard.VisualisePositionFromPieces()
-	fmt.Println() //make a new line to make seperate from usere's input
-	Input.RespondToUserInputRepeatly(chessBoard)
+	fmt.Println()                                //make a new line to make seperate from usere's input
+	Input.RespondToUserInputRepeatly(chessBoard) //runs the script that'll handle user input and respond accordingly
 }
