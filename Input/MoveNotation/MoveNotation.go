@@ -22,7 +22,7 @@ var columnLetters [8]string = [8]string{
 	"h",
 }
 
-var pieceNotationLetters [8]string = [8]string{ //array representing the letters sued to specify the piece to move in the SAN move notation in the order of the PieceType enum vales in the Pieces package
+var pieceNotationLetters [8]string = [8]string{ //array representing the letters used to specify the piece to move in the SAN move notation in the order of the PieceType enum values in the Pieces package
 	"P", //the pawn can normally not be specified using SAN, further more it'll be used if there is no piece specified, but it doesn't matter, if for some reason you want to, you can do so :)
 	"N",
 	"B",
@@ -32,7 +32,7 @@ var pieceNotationLetters [8]string = [8]string{ //array representing the letters
 }
 
 func TryToGetMoveFromNotation(board Board.ChessBoard, moveNotation string) (move Moves.Move, ok bool) { //this function will try to get move from given move notation, if it doesn't seem to get a valid move out of it, it'll return false as ok
-	ok = false          //set ok to true, so we can naked return, if something doesn't work, later on, we'll change it to true, before the last naked return
+	ok = false          //set ok to false, so we can naked return, if something doesn't work, later on, we'll change it to true, before the last naked return
 	move = Moves.Move{} //this variable will later be returned, as the move represented by the moveNotation, its variables will be calculated throughout this function
 
 	var curIndex int = 0
